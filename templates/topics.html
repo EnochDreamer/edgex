@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block hamburger %}
+<ul>
+    {% if (user.admin or user.superuser) %}
+    <li>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+        </svg>
+        <a href="{{url_for('new_topic',course_id=course_id)}}">Add Topic</a>
+    </li>
+    <li>
+        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+            width="24px" fill="#000000">
+            <g>
+                <rect fill="none" height="24" width="24" />
+            </g>
+            <g>
+                <g>
+                    <path d="M9,15c-2.67,0-8,1.34-8,4v2h16v-2C17,16.34,11.67,15,9,15z" />
+                    <path
+                        d="M22.1,6.84c0.01-0.11,0.02-0.22,0.02-0.34c0-0.12-0.01-0.23-0.03-0.34l0.74-0.58c0.07-0.05,0.08-0.15,0.04-0.22l-0.7-1.21 c-0.04-0.08-0.14-0.1-0.21-0.08L21.1,4.42c-0.18-0.14-0.38-0.25-0.59-0.34l-0.13-0.93C20.36,3.06,20.29,3,20.2,3h-1.4 c-0.09,0-0.16,0.06-0.17,0.15L18.5,4.08c-0.21,0.09-0.41,0.21-0.59,0.34l-0.87-0.35c-0.08-0.03-0.17,0-0.21,0.08l-0.7,1.21 c-0.04,0.08-0.03,0.17,0.04,0.22l0.74,0.58c-0.02,0.11-0.03,0.23-0.03,0.34c0,0.11,0.01,0.23,0.03,0.34l-0.74,0.58 c-0.07,0.05-0.08,0.15-0.04,0.22l0.7,1.21c0.04,0.08,0.14,0.1,0.21,0.08l0.87-0.35c0.18,0.14,0.38,0.25,0.59,0.34l0.13,0.93 C18.64,9.94,18.71,10,18.8,10h1.4c0.09,0,0.16-0.06,0.17-0.15l0.13-0.93c0.21-0.09,0.41-0.21,0.59-0.34l0.87,0.35 c0.08,0.03,0.17,0,0.21-0.08l0.7-1.21c0.04-0.08,0.03-0.17-0.04-0.22L22.1,6.84z M19.5,7.75c-0.69,0-1.25-0.56-1.25-1.25 s0.56-1.25,1.25-1.25s1.25,0.56,1.25,1.25S20.19,7.75,19.5,7.75z" />
+                    <path
+                        d="M19.92,11.68l-0.5-0.87c-0.03-0.06-0.1-0.08-0.15-0.06l-0.62,0.25c-0.13-0.1-0.27-0.18-0.42-0.24l-0.09-0.66 C18.12,10.04,18.06,10,18,10h-1c-0.06,0-0.11,0.04-0.12,0.11l-0.09,0.66c-0.15,0.06-0.29,0.15-0.42,0.24l-0.62-0.25 c-0.06-0.02-0.12,0-0.15,0.06l-0.5,0.87c-0.03,0.06-0.02,0.12,0.03,0.16l0.53,0.41c-0.01,0.08-0.02,0.16-0.02,0.24 c0,0.08,0.01,0.17,0.02,0.24l-0.53,0.41c-0.05,0.04-0.06,0.11-0.03,0.16l0.5,0.87c0.03,0.06,0.1,0.08,0.15,0.06l0.62-0.25 c0.13,0.1,0.27,0.18,0.42,0.24l0.09,0.66C16.89,14.96,16.94,15,17,15h1c0.06,0,0.12-0.04,0.12-0.11l0.09-0.66 c0.15-0.06,0.29-0.15,0.42-0.24l0.62,0.25c0.06,0.02,0.12,0,0.15-0.06l0.5-0.87c0.03-0.06,0.02-0.12-0.03-0.16l-0.52-0.41 c0.01-0.08,0.02-0.16,0.02-0.24c0-0.08-0.01-0.17-0.02-0.24l0.53-0.41C19.93,11.81,19.94,11.74,19.92,11.68z M17.5,13.33 c-0.46,0-0.83-0.38-0.83-0.83c0-0.46,0.38-0.83,0.83-0.83s0.83,0.38,0.83,0.83C18.33,12.96,17.96,13.33,17.5,13.33z" />
+                    <path
+                        d="M4.74,9h8.53c0.27,0,0.49-0.22,0.49-0.49V8.49c0-0.27-0.22-0.49-0.49-0.49H13c0-1.48-0.81-2.75-2-3.45V5.5 C11,5.78,10.78,6,10.5,6S10,5.78,10,5.5V4.14C9.68,4.06,9.35,4,9,4S8.32,4.06,8,4.14V5.5C8,5.78,7.78,6,7.5,6S7,5.78,7,5.5V4.55 C5.81,5.25,5,6.52,5,8H4.74C4.47,8,4.25,8.22,4.25,8.49v0.03C4.25,8.78,4.47,9,4.74,9z" />
+                    <path d="M9,13c1.86,0,3.41-1.28,3.86-3H5.14C5.59,11.72,7.14,13,9,13z" />
+                </g>
+            </g>
+        </svg>
+        <a href="{{url_for('room')}}">room</a>
+    </li>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <li>
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+            <path
+                d="M180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h291v60H180v600h291v60H180Zm486-185-43-43 102-102H375v-60h348L621 444l43-43 176 176-174 174Z" />
+        </svg>
+        <a href="{{url_for('logout')}}">Logout</a>
+    </li>
+    {% else %}
+    <li>
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+            <path
+                d="M489 936v-60h291V276H489v-60h291q24 0 42 18t18 42v600q0 24-18 42t-42 18H489Zm-78-185-43-43 102-102H120v-60h348L366 444l43-43 176 176-174 174Z" />
+        </svg>
+        <a href="{{url_for('login')}}">Login</a>
+    </li>
+    <li>
+        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+            width="24px" fill="#000000">
+            <g>
+                <rect fill="none" height="24" width="24" />
+            </g>
+            <g>
+                <path
+                    d="M20,9V6h-2v3h-3v2h3v3h2v-3h3V9H20z M9,12c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4S5,5.79,5,8C5,10.21,6.79,12,9,12z M9,6 c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2S7,9.1,7,8C7,6.9,7.9,6,9,6z M15.39,14.56C13.71,13.7,11.53,13,9,13c-2.53,0-4.71,0.7-6.39,1.56 C1.61,15.07,1,16.1,1,17.22V20h16v-2.78C17,16.1,16.39,15.07,15.39,14.56z M15,18H3v-0.78c0-0.38,0.2-0.72,0.52-0.88 C4.71,15.73,6.63,15,9,15c2.37,0,4.29,0.73,5.48,1.34C14.8,16.5,15,16.84,15,17.22V18z" />
+            </g>
+        </svg>
+        <a href="{{url_for('signup')}}">sign-up</a>
+    </li>
+    {% endif %}
+
+</ul>
+{% endblock %}
+{% block content %}
+
+<center class="topic-header" style="text-transform: capitalize; font-family: cursive;">{{course.name}}</center>
+{% if (course in user.subscribed()) or (user.admin) or (user.superuser) %}
+{% else %}
+<div class="subscribe" style="border-radius: 5x; z-index: 2;   display: flex;
+justify-content: center;
+margin-bottom: 10px;
+">
+    <button
+        style="padding: 10px; height: 100%; width: 150px; background-color: rgb(245, 121, 5);  color:white; border-radius: 6px; font-size: 1em;"
+        type="button" onclick="goPay({{course_id}})">Subscribe
+    </button>
+</div>
+{% endif %}
+<div class="course-description">
+    {{course.description}}
+</div>
+<div class="topics">
+    {% for topic in topics %}
+    <div class="wrapper" style="position: relative;">
+        <div class="topic" {% if ((user in (topic.course.subscribers())) or user.admin or user.superuser or topic.free)
+            %} onclick="topicContent({{course.id}},{{topic.topic_no}})" {% else %} onclick='goPay({{course_id}})' {%
+            endif %}>
+            <a style="text-transform: capitalize; text-decoration: none;"
+                href="{{ url_for('content',topic_no=topic.topic_no,course_id=course.id) if ((user in (topic.course.subscribers())) or user.admin or user.superuser or topic.free) else url_for('pay',course_id=course_id) }}">
+                Topic {{topic.topic_no}}: {{topic.title}}</a>
+            <p>date created:{{topic.created_at}}</p>
+        </div>
+        {% if (user.superuser) or topic.creator==user %}
+        <div class="topic-icon-container"
+            style=" background-color:rgba(52, 172, 180,.6) ; position: absolute; top:5px; right:5px; z-index:1; border-radius: 6px; width:30px; display: flex; justify-content: center; ">
+            <svg style="fill:white" id="topicIcon" onclick="topicActions({{topic.id}})"
+                xmlns="http://www.w3.org/2000/svg" height="42px" viewBox="0 0 24 24" width="48px" fill="#000000">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+            </svg>
+        </div>
+        {% endif %}
+        <div class="courseMenu" id="{{topic.id}}" data-id="topic_{{topic.id}}">
+            <ul>
+                <li style="margin: 5px 0;"><a href="{{url_for('edit_topic',topic_id=topic.id)}}">Edit</a></li>
+                <li>
+                    <form action="{{url_for('delete_topic',topic_id=topic.id)}}" method="POST"
+                        onsubmit="return confirm('are you sure you want to delete this item ?')"><input type="submit"
+                            value="Delete"> </form>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

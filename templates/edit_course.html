@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new course</title>
+    <link rel="stylesheet" href="/static/forms.css">
+</head>
+
+<body>
+    <a class="close" href="{{url_for('home')}}">
+        <button class="close-icon" aria-hidden='true'>&times;</button>
+    </a>
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <center class="topic-header" style="font-size: 1.2em;" >{{message}}</center>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <center class="form-header">
+        <h3>EDIT COURSE</h3>
+    </center>
+    <div class="form-container">
+        <div class="logo" style="width: 100%;display: flex; justify-content: center;">
+            <img src="/static/edgex.png" alt="edgex" height="100px" width="150px">
+        </div>
+        <form action="{{url_for('edit_course',course_id=course_id)}}" method="POST" enctype=multipart/form-data>
+            {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <label for="name">Course Name</label>
+                {{ form.name(class_='name',placeholder='Enter course name...',autofocus=true) }}
+            </div>
+            <div class="input-group">
+                <label for="description">Course description</label>
+                {{ form.description(class_='description',placeholder='Enter course description...',autofocus=true) }}
+            </div>
+            <div class="input-group">
+                <label for="price">Course price</label>
+                {{ form.price(class_='price',placeholder='Enter course price...',autofocus=true) }}
+            </div>
+            <div class="input-group">
+                <label for="duration">Course duration</label>
+                {{ form.duration(class_='duration',placeholder='Enter course duration...',autofocus=true) }}
+            </div>
+            {{ form.image(class_='file',placeholder='Enter Email...',autofocus=true) }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

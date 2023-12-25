@@ -1,0 +1,319 @@
+.home-container {
+    height: 200px;
+    position: relative;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 3px 1px rgb(47, 64, 70);
+    
+}
+
+
+.content {
+    background-color: rgb(233, 236, 198);
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+}
+
+.search-form {
+    margin: auto;
+    width: fit-content;
+    margin-top: 10px;
+
+}
+
+input[type=search] {
+    outline: none;
+    border: none;
+    border-bottom: solid;
+    border-color: rgb(52, 131, 145);
+    background-color: rgb(231, 233, 210);
+    border-radius: 5px;
+    color: rgb(32, 31, 31);
+    padding: 0 10px;
+    font-size: 1.2em;
+}
+
+input[type=search]:focus {
+    outline: none;
+    border-color: rgb(52, 172, 180);
+
+}
+
+.search-form button {
+    background-color: rgba(52, 172, 180);
+    color: white;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+}
+
+.course-name {
+    position: absolute;
+    bottom: 5px;
+    height: 20%;
+    width: 85%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(52, 172, 180);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 0 10px;
+    box-shadow: 0 0 3px 2px rgb(56, 82, 79);
+    text-align: justify;
+
+}
+
+
+
+.course-description {
+    height: fit-content;
+    width: fit-content;
+    background-color: rgb(52, 131, 145);
+    border-radius: 5px;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    word-break: break-word;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+
+
+.course-name a {
+    color: white;
+    text-transform: capitalize;
+    font-size: 1em;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    margin-right: 10px;
+
+}
+
+a:active {
+    color: darkgray;
+}
+
+.home {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.app-users {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    justify-content: space-around;
+    gap: 10px;
+    margin: 15px 10px;
+
+
+}
+
+.app-user {
+    position: relative;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    box-shadow: 0 0 3px 2px rgb(43, 41, 41);
+    background-color: rgb(52, 131, 145);
+    text-transform: capitalize;
+    font-family: fantasy;
+    padding: 2px 10px;
+    color: white;
+    border-radius: 10px;
+    height: 100px;
+
+}
+
+
+.topic-header {
+    text-transform: uppercase;
+    color: rgb(34, 147, 161);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 10px 0;
+    font-size: 1.3em;
+    font-weight: 200;
+}
+
+.topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    justify-content: space-around;
+    gap: 10px;
+    margin: 10px 15px;
+
+}
+
+.topic {
+    position: relative;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    box-shadow: 0 0 3px 1px;
+    background-color: rgb(52, 131, 145);
+    text-transform: capitalize;
+    font-family: fantasy;
+    padding: 2px 10px;
+    border-radius: 7px;
+    height: 120px;
+}
+
+.topic a {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-self: center;
+    color: white;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+.topic p {
+    display: flex;
+    align-self: center;
+    color: rgb(233, 236, 198);
+}
+
+.topic-content {
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(49, 42, 30);
+    word-break: break-word;
+    position: relative;
+    display: flex;
+    text-align: justify;
+    flex-direction: column;
+    padding: 0 10px;
+
+
+}
+
+.topic-navigation {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    margin-left: -20vw;
+    /*half of the div width */
+    background-color: rgba(190, 190, 151, 0.589);
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+    height: 38px;
+    border-radius: 2px;
+}
+
+
+.topic-navigation button {
+    background-color: rgba(52, 172, 180);
+    color: white;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+.topic-navigation * {}
+
+iframe {
+    width: 70%;
+    height: 200px;
+    display: flex;
+    align-self: center;
+    border-radius: 5px;
+    margin: 3px 15%;
+
+}
+
+.courseMenu {
+    transition: width .2s ease-in-out;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    z-index: 4;
+    background-color: rgba(52, 172, 180);
+    width: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 1px;
+
+}
+
+.courseMenu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 0px;
+    color: white;
+}
+
+.courseMenu a {
+    text-decoration: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    font-size: 1.1em;
+}
+
+.courseMenu input[type=submit] {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-size: 1em;
+}
+
+.courseMenu li {
+    display: flex;
+    align-items: center;
+}
+
+.courseMenu form {
+    display: flex;
+    align-items: center;
+}
+
+.courseMenu svg {
+    height: 28px;
+    width: 28px;
+    margin-right: 2px;
+}
+
+.active-link {
+    border-bottom: solid;
+    border-bottom-width: 0.2em;
+    color: white;
+    
+
+
+}
+
+
+
+
+@media screen and (min-width:870px) {
+
+
+    iframe {
+        width: 50%;
+        height: 20vh;
+        display: flex;
+        align-content: center;
+        border-radius: 5px;
+        margin: 3px 25%;
+
+    }
+
+    .course-description {
+        margin-left: 220px;
+        margin-right: 5px;
+    }
+}

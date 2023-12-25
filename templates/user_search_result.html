@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block hamburger %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<center class="topic-header" style="font-size: 1.2em;text-transform: lowercase;" >search result for:'{{search_term}}'</center>
+<div class="app-users">
+    {% for app_user in app_users %}
+    <div class="wrapper" style="position: relative;" {% if user.superuser %} onclick="userActions({{app_user.id}})"  {% endif %} >
+        <div class="app-user">
+            <p style="text-transform: lowercase;">{{app_user.email}}</p>
+            <p>admin:{{app_user.admin}}</p>
+
+        </div>
+        
+        <div class="courseMenu" id="{{app_user.id}}" >
+            <ul>
+                <li>
+                    <form action="{{url_for('switch_admin',user_id=app_user.id)}}" method="POST"
+                        onsubmit="return confirm('are you sure you want to change this user admin admin status ?')"><input type="submit"
+                            value="{{'Unadmin' if app_user.admin else 'Admin'}}"> </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

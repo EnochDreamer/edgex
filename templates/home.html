@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block hamburger %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class="search-form">
+    <form action="{{url_for('home')}}" method="GET">
+        <input type="search" name="search" placeholder="Search Course" required>
+         <button type="submit">search
+         </button>
+    </form>
+</div>
+<div class="home">
+    {% for course in courses %}
+    <div class="wrapper" style="position: relative; max-width: 350px;">
+        <div class="home-container" onclick="courseContent({{course.id}})"
+            style="background-image: url('/static/img/course_image/{{course.image}}');">
+            <div class="course-name">
+                <a href="{{url_for('course_content',course_id=course.id)}}" style="text-transform: capitalize; font-family: cursive;" >{{course.name}}</a>
+                <!-- <p>{{course.created_at}}</p> -->
+            </div>
+        </div>
+        {% if (user.superuser) %}
+        <div class="course-icon-container"
+            style=" background-color:rgb(52, 172, 180) ; position: absolute; top:5px; right:5px; z-index:1; border-radius: 6px; width:30px; display: flex; justify-content: center; ">
+            <svg style="fill:white" id="courseIcon" onclick="courseActions({{course.id}}) "
+                xmlns="http://www.w3.org/2000/svg" height="42px" viewBox="0 0 24 24" width="48px" fill="#000000">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+            </svg>
+        </div>
+        {% endif %}
+        <div class="courseMenu" id="{{course.id}}" data-id="course_{{course.id}}">
+            <ul>
+                {% block Action scoped %}
+                <li style="margin: 5px 0;">
+                    <a href="{{url_for('edit_course',course_id=course.id)}}">Edit</a></li>
+                <li>
+                    <form action="{{url_for('delete_course',course_id=course.id)}}" method="POST"
+                        onsubmit="return confirm('are you sure you want to delete this item ?')">
+                        <input type="submit"
+                            value="Delete"> </form>
+                </li>
+                {% endblock %}
+            </ul>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

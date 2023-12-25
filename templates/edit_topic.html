@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new topic</title>
+    <link rel="stylesheet" href="/static/addtopic.css">
+    {{pagedown.html_head()}}
+</head>
+<body>
+
+    <a class="close" href="{{url_for('home')}}">
+        <button class="close-icon" aria-hidden='true'>&times;</button>
+    </a>
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <center class="topic-header" style="font-size: 1.2em;" >{{message}}</center>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <center class="form-header">
+        <h3>EDIT TOPIC</h3>
+    </center>
+    <div class="form-container">
+        <div class="logo" style="width: 100%;display: flex; justify-content: center;">
+            <img src="/static/edgex.png" alt="edgex" height="100px" width="150px">
+        </div>
+        <form action="{{url_for('edit_topic',topic_id=topic.id)}}" method="POST">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <div class="input-group">
+            <label for="title">Topic Title</label>
+            {{ form.title(class_='topic-title',placeholder='Enter topic title...',autofocus=true) }}
+        </div>
+        <div class="input-group">
+            <label for="topic_no">Topic Number</label>
+            {{ form.topic_no(class_='topic-no',autofocus=true) }}
+        </div>
+        <div class="check-box">
+            <label for="free">free ?</label>
+            {{ form.free(class_='free') }}
+        </div>
+        
+        <button  style="position: absolute; top: o; right: 0;" type="submit">Save</button>
+        <div class="textarea">
+            <center><label for="content">Enter content (Github flavored markdowns supported) </label></center>
+            {{ form.content(class_='topic-content',autofocus=true) }}
+        </div>
+    </form>
+    </div>
+</body>
+</html>

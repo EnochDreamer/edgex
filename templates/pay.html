@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+payment
+{% endblock %}
+{% block hamburger %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<center class="topic-header" style="font-size: 1.5em;">
+    payments
+</center>
+
+<div class="pay-content" style="display: flex; flex-direction: column; align-items: center;">
+    <div class="home-container" onclick="courseContent({{course.id}})"
+        style="height:40vh;margin: auto;margin-bottom: 10px; width: 60%;background-image: url('/static/img/course_image/{{course.image}}');">
+
+    </div>
+    <div class="course-details"
+        style="display: flex;flex-direction: column;
+ text-transform: capitalize; color:white;margin: auto; background-color: rgb(52, 131, 145);font-family: Arial, Helvetica, sans-serif; border-radius: 10px; padding:10px; margin-bottom: 10px; width: 40%; ">
+        <span>course name : {{course.name}}</span>
+        <span>price : NGN {{course.price}}</span>
+        <span>duration : {{course.duration}}</span>
+    </div>
+    <!-- <button id="payButton"
+        style="padding: 10px;margin: auto;  width: 150px; background-color: rgb(245, 121, 5);  color:white; border-radius: 6px; font-size: 1em;margin-bottom: 10px;"
+        type="button">pay now
+    </button>
+
+    <div id="accountDetails" class="account-details"
+        style="display: None;margin: auto; flex-direction: column;align-items: center;word-break: keep-all; width: fit-content; height: fit-content;color: white; padding:10px;border-radius: 10px;margin-bottom: 10px;font-family: Arial, Helvetica, sans-serif; background-color: rgb(240, 119, 6); ">
+        <p>make a payment of {{course.price}} to the account below.Ensure you keep screenshots of the transaction</p>
+        <span> Name: Ekele Enoch </span>
+        <span>Bank Name: Union Bank</span>
+        <span>Account Number: 0105960237 </span>
+        <p>follow the link bellow to confirm your payment</p>
+        <a href="whatsapp.com/api/+2348125203374">confirm</a>
+    </div> -->
+    <form id="paymentForm"
+        style=" border-radius: 10px; min-width: 40vw; max-width: fit-content; margin-bottom: 10px; background-color: rgb(52, 131, 145)">
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email-address" value="{{user.email}}" required readonly />
+        </div>
+        <div class="input-group">
+            <label for="amount">Amount (NGN)</label>
+            <input type="tel" id="amount" value="{{course.price}}" required readonly />
+        </div>
+        <div class="input-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" />
+        </div>
+        <div class="input-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" />
+        </div>
+        <div class="form-submit">
+            <button id="course" data-course-id="{{course.id}}"
+                style="padding: 10px;margin: auto;  width: 150px; background-color: rgb(245, 121, 5);color:white; border-radius: 6px; font-size: 1em;margin-bottom: 10px;"
+                type="submit" onclick="payWithPaystack(event)"> Pay </button>
+        </div>
+    </form>
+
+    <div
+        style="display: flex; justify-content: center;background-color: rgb(52, 131, 145);font-family: Arial, Helvetica, sans-serif; border-radius: 10px; padding:10px;width: 40%;color: white;">
+        <span>Description : {{course.description}}</span>
+    </div>
+
+</div>
+<script src="/static/paystackScript.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+{% endblock %}

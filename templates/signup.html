@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign-up</title>
+    <link rel="stylesheet" href="/static/forms.css">
+</head>
+
+<body>
+    <a class="close" href="{{url_for('home')}}">
+        <button class="close-icon" aria-hidden='true'>&times;</button>
+    </a>
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <center class="topic-header" style="font-size: 1.2em;" >{{message}}</center>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <center class="form-header">
+        <h3>SIGN UP</h3>
+    </center>
+    <div class="form-container">
+        <div class="logo" style="width: 100%;display: flex; justify-content: center;">
+            <img src="/static/edgex.png" alt="edgex" height="100px" width="150px">
+        </div>
+        <form action="{{ url_for('signup') }}" method="POST">
+            {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
+
+            <div class="input-group">
+                {% if form.name.errors %}
+                <div class="error">
+                    {% for error in form.errors %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <label for="name">Fullname</label>
+                {{ form.name(class_='name',placeholder='Enter fullname...',autofocus=true) }}
+            </div>
+
+            <div class="input-group">
+                {% if form.email.errors %}
+                <div class="error">
+                    {% for error in form.errors %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <label for="email">Email</label>
+                {{ form.email(class_='email',placeholder='Enter Email...',autofocus=true) }}
+            </div>
+
+            <div class="input-group">
+                {% if form.address.errors %}
+                <div class="error">
+                    {% for error in form.errors %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <label for="address">address</label>
+                {{ form.address(class_='address',placeholder='Enter address...',autofocus=true) }}
+            </div>
+
+            <div class="input-group">
+                {% if form.errors %}
+                <div class="error">
+                    {% for error in form.errors %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <label for="password">Password</label>
+                {{ form.password(class_='password',placeholder='Enter Password...',autofocus=true) }}
+            </div>
+            <div class="input-group">
+                {% if form.errors %}
+                <div class="error">
+                    {% for error in form.errors %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+               {% endif %}
+                <label for="verify_password">Confirm password</label>
+                {{ form.verify_password(class_='verify',placeholder='Verify password') }}
+            </div>
+            <a href="{{url_for('login')}}" style="text-decoration: none;">Already have an account? Login!</a> 
+            <button type="submit">SIGN UP</button>
+        </form>
+    </div>
+</body>
+
+</html>

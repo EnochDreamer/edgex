@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block hamburger %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class="search-form">
+    <form action="{{url_for('users')}}" method="GET">
+        <input type="search" name="search" placeholder="Search User" required>
+        <button type="submit" style="height: fit-content;">
+            <svg style="fill: white; display:flex;align-self:center" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="32">
+                <path
+                    d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z" />
+            </svg>
+        </button>
+    </form>
+</div>
+<div class="app-users">
+    {% for app_user in app_users %}
+    <div class="wrapper" style="position: relative;" {% if user.superuser %} onclick="userActions({{app_user.id}})"  {% endif %}>
+        <div class="app-user">
+            <p style="text-transform: lowercase;">{{app_user.email}}</p>
+            <p>admin:{{app_user.admin}}</p>
+
+        </div>
+        
+        <div class="courseMenu" id="{{app_user.id}}">
+            <ul>
+                <li>
+                    <form action="{{url_for('switch_admin',user_id=app_user.id)}}" method="POST"
+                        onsubmit="return  confirm('are you sure you want to change this user admin status ?')"><input
+                            type="submit" value="{{'Unadmin' if app_user.admin else 'Admin'}}"> </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

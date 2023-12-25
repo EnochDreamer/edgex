@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/forms.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 40px auto 40px;
+        }
+
+        .header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: rgb(52, 131, 145);
+            box-shadow: 0 3px 6px 0 rgb(59, 59, 59);
+        }
+
+        .footer {
+            background-color: rgb(52, 131, 145);
+            box-shadow: 0 -3px 6px 0 rgb(59, 59, 59);
+            z-index: 2;
+        }
+
+        .menu {
+            float: left;
+        }
+
+        #menu {
+            fill: white;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+
+        .user {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: right;
+            width: 40px;
+            height: 40px;
+            right: 0;
+            background-color: rgb(52, 172, 180);
+            border-radius: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+        }
+
+        .user span {
+            display: flex;
+            align-content: center;
+        }
+
+        .hamburger {
+            position: absolute;
+            top: 40px;
+            z-index: 4;
+            background-color: rgb(52, 172, 180);
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            box-shadow: 0 5px 10px 0 rgb(51, 50, 50);
+            border-radius: 5px;
+
+        }
+
+        .hamburger ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-left: 0;
+            flex-wrap: nowrap;
+            overflow: hidden;
+        }
+
+        .hamburger li {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger svg {
+            margin-right: 5px;
+            width: 22px;
+            height: 28px;
+        }
+
+        .hamburger a {
+            text-decoration: none;
+            border-bottom-width: 0.2em;
+            color: white;
+
+        }
+
+        .hamburger a:hover {
+            border-bottom: solid;
+            border-color: rgb(255, 255, 255);
+            border-bottom-width: 0.2em;
+            transition: all .2s ease-in-out;
+        }
+
+        .hamburger ul li {
+
+            margin-bottom: 10px;
+        }
+
+        #overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(95, 90, 90, 0.5);
+            z-index: 2;
+        }
+
+        .hamburger-list {
+            display: none;
+            float: left;
+            width: 200px;
+            background-color: rgb(52, 172, 180);
+            margin: 12px 12px;
+            border-radius: 10px;
+            height: 350px;
+            box-shadow: 0 3px 10px 0px black;
+
+        }
+
+        .hamburger-list ul {
+            width: 100%;
+            padding-left: 6px;
+            float: left;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: left;
+            box-sizing: border-box;
+
+        }
+
+        .hamburger-list a {
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: .95em;
+        }
+
+        .hamburger-list a:hover {
+            color: rgb(233, 236, 198);
+            border-bottom: solid;
+            border-color: rgb(255, 255, 255);
+            border-bottom-width: 0.2em;
+            transition: all .2s ease-in-out;
+        }
+
+        .hamburger-list li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hamburger-list svg {
+            margin-right: 5px;
+            width: 32px;
+            height: 38px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-self: center;
+            margin: auto;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+        }
+
+        @media screen and (min-width:870px) {
+            .hamburger-list {
+                display: block;
+            }
+
+            #menu {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div class="header">
+        <div class="header-item menu ">
+
+            <svg id="menu" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 96 960 960" width="32">
+                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+            </svg>
+        </div>
+
+        <div id="user" class="header-item user">
+            <span " >{{user.name[0]}}</span>
+        </div>
+        <div id="hamburger" class="hamburger"
+                style="left: 0px; width: 0px; height:fit-content; transition: width 0.5s ease-in-out; border-bottom-right-radius: 5px;text-transform: capitalize;">
+                {{self.hamburger_list()}}
+        </div>
+        <div class="logo-container">
+            <img src="/static/edgex.png" alt="edgex-logo" style="height: 38px; width: 150px;">
+        </div>
+
+        <div id="userMenu" class="hamburger"
+            style="right: 0px; width: 120px; height: 0px; transition:height 0.5s ease-out; border-bottom-left-radius: 5px; text-transform: capitalize;">
+            {% block hamburger %}
+            <ul>
+                {% if (user.admin or user.superuser) %}
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                        fill="#000000">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+                    </svg>
+                    <a href="{{url_for('new_course')}}">Course</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
+                        viewBox="0 0 24 24" width="24px" fill="#000000">
+                        <g>
+                            <rect fill="none" height="24" width="24" />
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M9,15c-2.67,0-8,1.34-8,4v2h16v-2C17,16.34,11.67,15,9,15z" />
+                                <path
+                                    d="M22.1,6.84c0.01-0.11,0.02-0.22,0.02-0.34c0-0.12-0.01-0.23-0.03-0.34l0.74-0.58c0.07-0.05,0.08-0.15,0.04-0.22l-0.7-1.21 c-0.04-0.08-0.14-0.1-0.21-0.08L21.1,4.42c-0.18-0.14-0.38-0.25-0.59-0.34l-0.13-0.93C20.36,3.06,20.29,3,20.2,3h-1.4 c-0.09,0-0.16,0.06-0.17,0.15L18.5,4.08c-0.21,0.09-0.41,0.21-0.59,0.34l-0.87-0.35c-0.08-0.03-0.17,0-0.21,0.08l-0.7,1.21 c-0.04,0.08-0.03,0.17,0.04,0.22l0.74,0.58c-0.02,0.11-0.03,0.23-0.03,0.34c0,0.11,0.01,0.23,0.03,0.34l-0.74,0.58 c-0.07,0.05-0.08,0.15-0.04,0.22l0.7,1.21c0.04,0.08,0.14,0.1,0.21,0.08l0.87-0.35c0.18,0.14,0.38,0.25,0.59,0.34l0.13,0.93 C18.64,9.94,18.71,10,18.8,10h1.4c0.09,0,0.16-0.06,0.17-0.15l0.13-0.93c0.21-0.09,0.41-0.21,0.59-0.34l0.87,0.35 c0.08,0.03,0.17,0,0.21-0.08l0.7-1.21c0.04-0.08,0.03-0.17-0.04-0.22L22.1,6.84z M19.5,7.75c-0.69,0-1.25-0.56-1.25-1.25 s0.56-1.25,1.25-1.25s1.25,0.56,1.25,1.25S20.19,7.75,19.5,7.75z" />
+                                <path
+                                    d="M19.92,11.68l-0.5-0.87c-0.03-0.06-0.1-0.08-0.15-0.06l-0.62,0.25c-0.13-0.1-0.27-0.18-0.42-0.24l-0.09-0.66 C18.12,10.04,18.06,10,18,10h-1c-0.06,0-0.11,0.04-0.12,0.11l-0.09,0.66c-0.15,0.06-0.29,0.15-0.42,0.24l-0.62-0.25 c-0.06-0.02-0.12,0-0.15,0.06l-0.5,0.87c-0.03,0.06-0.02,0.12,0.03,0.16l0.53,0.41c-0.01,0.08-0.02,0.16-0.02,0.24 c0,0.08,0.01,0.17,0.02,0.24l-0.53,0.41c-0.05,0.04-0.06,0.11-0.03,0.16l0.5,0.87c0.03,0.06,0.1,0.08,0.15,0.06l0.62-0.25 c0.13,0.1,0.27,0.18,0.42,0.24l0.09,0.66C16.89,14.96,16.94,15,17,15h1c0.06,0,0.12-0.04,0.12-0.11l0.09-0.66 c0.15-0.06,0.29-0.15,0.42-0.24l0.62,0.25c0.06,0.02,0.12,0,0.15-0.06l0.5-0.87c0.03-0.06,0.02-0.12-0.03-0.16l-0.52-0.41 c0.01-0.08,0.02-0.16,0.02-0.24c0-0.08-0.01-0.17-0.02-0.24l0.53-0.41C19.93,11.81,19.94,11.74,19.92,11.68z M17.5,13.33 c-0.46,0-0.83-0.38-0.83-0.83c0-0.46,0.38-0.83,0.83-0.83s0.83,0.38,0.83,0.83C18.33,12.96,17.96,13.33,17.5,13.33z" />
+                                <path
+                                    d="M4.74,9h8.53c0.27,0,0.49-0.22,0.49-0.49V8.49c0-0.27-0.22-0.49-0.49-0.49H13c0-1.48-0.81-2.75-2-3.45V5.5 C11,5.78,10.78,6,10.5,6S10,5.78,10,5.5V4.14C9.68,4.06,9.35,4,9,4S8.32,4.06,8,4.14V5.5C8,5.78,7.78,6,7.5,6S7,5.78,7,5.5V4.55 C5.81,5.25,5,6.52,5,8H4.74C4.47,8,4.25,8.22,4.25,8.49v0.03C4.25,8.78,4.47,9,4.74,9z" />
+                                <path d="M9,13c1.86,0,3.41-1.28,3.86-3H5.14C5.59,11.72,7.14,13,9,13z" />
+                            </g>
+                        </g>
+                    </svg> <a href="{{url_for('room')}}">room</a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+                        <path
+                            d="M180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h291v60H180v600h291v60H180Zm486-185-43-43 102-102H375v-60h348L621 444l43-43 176 176-174 174Z" />
+                    </svg>
+                    <a href="{{url_for('logout')}}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+                        <path
+                            d="M489 936v-60h291V276H489v-60h291q24 0 42 18t18 42v600q0 24-18 42t-42 18H489Zm-78-185-43-43 102-102H120v-60h348L366 444l43-43 176 176-174 174Z" />
+                    </svg>
+                    <a href="{{url_for('login')}}">Login</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
+                        viewBox="0 0 24 24" width="24px" fill="#000000">
+                        <g>
+                            <rect fill="none" height="24" width="24" />
+                        </g>
+                        <g>
+                            <path
+                                d="M20,9V6h-2v3h-3v2h3v3h2v-3h3V9H20z M9,12c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4S5,5.79,5,8C5,10.21,6.79,12,9,12z M9,6 c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2S7,9.1,7,8C7,6.9,7.9,6,9,6z M15.39,14.56C13.71,13.7,11.53,13,9,13c-2.53,0-4.71,0.7-6.39,1.56 C1.61,15.07,1,16.1,1,17.22V20h16v-2.78C17,16.1,16.39,15.07,15.39,14.56z M15,18H3v-0.78c0-0.38,0.2-0.72,0.52-0.88 C4.71,15.73,6.63,15,9,15c2.37,0,4.29,0.73,5.48,1.34C14.8,16.5,15,16.84,15,17.22V18z" />
+                        </g>
+                    </svg>
+                    <a href="{{url_for('signup')}}">sign-up</a>
+                </li>
+                {% endif %}
+
+
+            </ul>
+
+            {% endblock %}
+        </div>
+
+
+    </div>
+    <div id="overlay">
+
+    </div>
+    <div class="content">
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <center class="topic-header" style="font-size: 1.2em; text-transform: lowercase;">
+            {{message}}
+        </center>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="hamburger-list">
+            <div class="logo" style="width: 100%;">
+                <img src="/static/edgex.png" alt="edgex" height="100px" width="150px">
+            </div>
+            {% block hamburger_list %}
+            <ul>
+                <li><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="38px"
+                        viewBox="0 0 24 24" width="38px" fill="#000000">
+                        <g>
+                            <rect fill="none" height="24" width="24" />
+                        </g>
+                        <g>
+                            <g>
+                                <polygon points="1,11 1,21 6,21 6,15 10,15 10,21 15,21 15,11 8,6" />
+                                <path d="M10,3v1.97l7,5V11h2v2h-2v2h2v2h-2v4h6V3H10z M19,9h-2V7h2V9z" />
+                            </g>
+                        </g>
+                    </svg>
+                    <a href="{{url_for('home')}}">Home</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 0 24 24" width="38px"
+                        fill="#000000">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M8 16h12V4H8v12zm2-10h8v2h-8V6zm0 3h8v2h-8V9zm0 3h4v2h-4v-2z" opacity=".3" />
+                        <path
+                            d="M4 22h14v-2H4V6H2v14c0 1.1.9 2 2 2zM6 4v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2zm14 12H8V4h12v12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z" />
+                    </svg>
+                    <a href="{{url_for('home')}}">Courses</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 0 24 24" width="38px"
+                        fill="#000000">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                    </svg>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 96 960 960" width="38px">
+                        <path
+                            d="M795 936q-122 0-242.5-60T336 720q-96-96-156-216.5T120 261q0-19.286 12.857-32.143T165 216h140q13.611 0 24.306 9.5Q340 235 343 251l27 126q2 14-.5 25.5T359 422L259 523q56 93 125.5 162T542 802l95-98q10-11 23-15.5t26-1.5l119 26q15.312 3.375 25.156 15.188Q840 740 840 756v135q0 19.286-12.857 32.143T795 936ZM229 468l81-82-23-110H180q0 39 12 85.5T229 468Zm369 363q41 19 89 31t93 14V769l-103-21-79 83ZM229 468Zm369 363Z" />
+                    </svg>
+                    <a href="#">Contact us</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
+                        viewBox="0 0 24 24" width="24px" fill="#000000">
+                        <g>
+                            <rect fill="none" height="24" width="24" />
+                            <path
+                                d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H3V6h14v8zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm13 0v11c0 1.1-.9 2-2 2H4v-2h17V7h2z" />
+                        </g>
+                    </svg>
+                    <a href="{{url_for('subscriptions')}}">Subscriptions</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endblock %}
+        </div>
+        {% block content %}
+
+
+        {% endblock %}
+    </div>
+
+    <div class="footer">
+    </div>
+    <script>
+        const menu = document.getElementById('menu');
+        const hamburger = document.getElementById('hamburger');
+        console.log(hamburger)
+        const overlay = document.getElementById('overlay');
+        const user = document.getElementById('user');
+        const userMenu = document.getElementById('userMenu');
+        const links = document.getElementsByTagName('a');
+        //const courseMenu = document.getElementById(id)
+        //const courseIcon=document.getElementById('courseIcon')
+        //const course = document.getElementById('course')
+
+        for (let link of links) {
+            if (link.getAttribute('href') == location.pathname) {
+                link.className = 'active-link'
+            }
+            //console.log(link.getAttribute('href'))
+            //console.log(location.pathname)
+        }
+        function courseContent(id) {
+            //const id=event.target.dataset['id']
+            window.location = `/courses/${id}`
+        }
+        function goPay(id) {
+            window.location = `/payment/${id}`
+        }
+
+        function topicContent(course_id, topic_no) {
+            //const id=event.target.dataset['id']
+            window.location = `/courses/${course_id}/${topic_no}`
+        }
+
+        var courseMenuState = ''
+        function courseActions(id) {
+            const courseMenu = document.getElementById(id)
+            overlay.style.display = 'block'
+            courseMenu.style.width = '80px'
+            courseMenuState = courseMenu
+        }
+
+        var topicMenuState = ''
+        function topicActions(id) {
+            const topicMenu = document.getElementById(id)
+            overlay.style.display = 'block'
+            topicMenu.style.width = '80px'
+            topicMenuState = topicMenu
+        }
+        var userMenuState = ''
+        function userActions(id) {
+            const userMenu = document.getElementById(id)
+            overlay.style.display = 'block'
+            userMenu.style.width = '80px'
+            userMenuState = userMenu
+
+        }
+
+        menu.onclick = () => {
+            console.log(hamburger)
+            overlay.style.display = 'block'
+            hamburger.style.width = '150px'
+        }
+        overlay.onclick = (event) => {
+            const courseMenu = document.getElementById(event.target.dataset['id'])
+            hamburger ? hamburger.style.width = '0px':null
+            overlay.style.display = 'none'
+            userMenu.style.height = '0px'
+            courseMenuState ? (courseMenuState.style.width = '0') : null
+            topicMenuState ? (topicMenuState.style.width = '0') : null
+            userMenuState ? (userMenuState.style.width = '0') : null
+        }
+        user.onclick = () => {
+            overlay.style.display = 'block'
+            userMenu.style.height = 'fit-content'
+        }
+    </script>
+</body>
+
+</html>

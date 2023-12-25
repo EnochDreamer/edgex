@@ -1,0 +1,27 @@
+{% extends 'topics.html' %}
+
+
+
+{% block hamburger %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<center>
+    <h3
+        style="text-emphasis:3em;text-decoration: underline; text-transform: uppercase;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+        {{topic.title}}</h3>
+</center>
+<div class="topic-content">
+    {{topic.content|markdown |safe}}
+    <div class="topic-navigation">
+        <a href="{{url_for('content',course_id=course_id,topic_no=(topic.topic_no - 1))}}">
+            <button type="button" {% if (topic.topic_no)==1 %} disabled {% endif %}>Prev</button>
+        </a>
+        <a href="{{url_for('content',course_id=course_id,topic_no=(topic.topic_no + 1))}}">
+            <button type='button' {% if (topic.topic_no)==topic_count %} disabled {% endif %}>Next</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
