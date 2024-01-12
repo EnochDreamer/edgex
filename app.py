@@ -11,7 +11,16 @@ from markdown import markdown
 import dateutil.parser
 import babel
 import requests
+import boto3
 
+ssm = boto3.client('ssm', 'us-east-1')
+def get_parameters():
+    response = ssm.get_parameters(
+        Names=['paystack'],WithDecryption=True
+    )
+    for parameter in response['Parameters']:
+        print(parameter)
+        return parameter['Value']
 
 
 app=Flask(__name__)
@@ -414,7 +423,7 @@ def switch_admin(user_id):
 def verify_pay(course_id,reference):
     url=f"https://api.paystack.co/transaction/verify/{reference}"
     headers = {
-        'Authorization': 'Bearer sk_live_16a4a90079d49ae39f60014cf3aeee7cf7c25fbc',
+        'Authorization': get_parameters(),
     }
     response = requests.get(
         url,
