@@ -8,25 +8,31 @@ from flask_login import LoginManager,login_required,login_user,logout_user,curre
 from flask_pagedown import PageDown
 from auth import requires_auth
 from markdown import markdown
-import dateutil.parser
-import babel
+# import dateutil.parser
+# import babel
 import requests
-import boto3
 
-ssm = boto3.client('ssm', 'us-east-1')
-def get_parameters():
-    response = ssm.get_parameters(
-        Names=['paystack'],WithDecryption=True
-    )
-    for parameter in response['Parameters']:
-        print(parameter)
-        return parameter['Value']
+# ssm = boto3.client('ssm', 'us-east-1')
+# def get_parameters():
+#     response = ssm.get_parameters(
+#         Names=['paystack'],WithDecryption=True
+#     )
+#     for parameter in response['Parameters']:
+#         print(parameter)
+#         return parameter['Value']
 
 
 app=Flask(__name__)
 
 PageDown(app)
 db_setup(app,Migrate)
+
+# Markdown Editor route
+@app.route('/editor')
+@login_required
+def editor():
+    return render_template('editor.html', user=current_user)
+
 # @app.route('/signup',methods=['GET','POST'])
 # def signup():
 #     form=SignUpForm()
@@ -51,18 +57,18 @@ def redirect_dest(fallback,request=request):
          
 
 #@app.template_filter('datetime')
-def format_datetime(value, format='medium'):
-    new_value=str(value)
-    date = dateutil.parser.parse(new_value)
-    if format == 'long':
-        format="EEEE MMMM, d, y 'at' h:mma"
-    elif format == 'short':
-        format="EE MM, dd, y h:mma"
-    elif format=='narrow':
-        format=""
-    return babel.dates.format_datetime(date, format, locale='en')
+# def format_datetime(value, format='medium'):
+#     new_value=str(value)
+#     date = dateutil.parser.parse(new_value)
+#     if format == 'long':
+#         format="EEEE MMMM, d, y 'at' h:mma"
+#     elif format == 'short':
+#         format="EE MM, dd, y h:mma"
+#     elif format=='narrow':
+#         format=""
+#     return babel.dates.format_datetime(date, format, locale='en')
 
-app.jinja_env.filters['datetime'] = format_datetime
+# app.jinja_env.filters['datetime'] = format_datetime
 app.jinja_env.filters['markdown'] = markdown
 
 def expire_subscriptions(user):

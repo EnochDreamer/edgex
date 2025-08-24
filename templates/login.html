@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="/static/forms.css">
+    <!-- Using compiled Tailwind CSS -->
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     {% with messages=get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-    <center class="topic-header" style="font-size: 1.2em;" >{{message}}</center>
+    <center class="topic-header alert-message">{{message}}</center>
     {% endfor %}
     {% endif %}
     {% endwith %}
@@ -24,7 +24,7 @@
         <h3>LOGIN</h3>
     </center>
     <div class="form-container">
-        <div class="logo" style="width: 100%;display: flex; justify-content: center;">
+        <div class="logo auth-logo">
             <img src="/static/edgex.png" alt="edgex" height="100px" width="150px">
         </div>
         <form action="{{ url_for('login') }}" method="POST">
@@ -57,7 +57,7 @@
                 <label for="remember">Remember me?</label>
                 {{ form.remember(class_='remember') }}
             </div>
-            <a href="{{url_for('signup')}}" style="text-decoration: none;" >Don't yet have an account? Signup!</a>
+            <a href="{{url_for('signup')}}" class="auth-link">Don't yet have an account? Signup!</a>
             <button type="submit">LOGIN</button>
         </form>
 

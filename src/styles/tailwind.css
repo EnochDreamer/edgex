@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-specific minimal overrides (keep small) */
+/* We'll gradually remove custom rules from static/base.css and migrate to Tailwind */

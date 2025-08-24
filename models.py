@@ -5,28 +5,29 @@ from flask_login import UserMixin,LoginManager,AnonymousUserMixin
 from uuid import uuid4
 import os
 from datetime import datetime
-import boto3
+from dotenv import load_dotenv
+load_dotenv()
 
 
-ssm = boto3.client('ssm', 'us-east-1')
-def get_parameters():
-    response = ssm.get_parameters(
-        Names=['database'],WithDecryption=True
-    )
-    for parameter in response['Parameters']:
-        return parameter['Value']
+
+# def get_parameters():
+#     response = ssm.get_parameters(
+#         Names=['database'],WithDecryption=True
+#     )
+#     for parameter in response['Parameters']:
+#         return parameter['Value']
 db_host=os.environ.get('RDS_HOSTNAME')
 db_port=os.environ.get('RDS_PORT')
-db=os.environ.get('RDS_DB_NAME')
+db_name=os.environ.get('RDS_DB_NAME')
 db_username=os.environ.get('RDS_USERNAME')
 db_password=os.environ.get('RDS_PASSWORD')
 
-db=SQLAlchemy()
-database_path=f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db}'
-def db_setup(app,Migrate,database_path=database_path,db=db):
+db = SQLAlchemy()
+database_path = f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_name}'
+def db_setup(app, Migrate, database_path=database_path, db=db):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["SECRET_KEY"]=f"{get_parameters()}"
+    app.config["SECRET_KEY"]=os.environ.get('APP_SECRET_KEY')
     db.app = app
     db.init_app(app)
     migrate=Migrate(app,db)

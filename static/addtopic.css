@@ -1,165 +1,149 @@
-.close-icon{
+/* LEGACY STYLES REMOVED
+    Replaced by Tailwind CSS compilation output at /static/dist/tailwind.css
+*/
+
+/* ...previous rules removed... */
+
+.close-icon:hover {
+    background: rgba(52, 172, 180, 0.1);
+    transform: scale(1.05);
+}
+
+.close-icon:active {
+    transform: scale(0.95);
+}
+
+.check-box {
     display: flex;
     align-items: center;
-    color: rgb(78, 197, 218);
-    border: none;
-    outline: none;
-    height: 38px;
-    width: 38px;
+    gap: 8px;
+    padding: 4px;
     cursor: pointer;
-    font-size: 2.5em;
+    transition: opacity 0.2s;
 }
-.check-box{
-    display: flex;
-    align-items: center;
-    height: fit-content;
+
+.check-box:hover {
+    opacity: 0.9;
 }
+
 .topic-header {
     text-transform: uppercase;
-    color: rgb(34, 147, 161);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 10px 0;
-    font-size: 1.3em;
-    font-weight: 200;
+    color: #34acb4;
+    font-family: inherit;
+    margin: 24px 0 16px;
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-align: center;
 }
 
-label{
-    text-transform: capitalize;
-}
+/* Remove label override to use global styles */
 
-.form-container{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flask-pagedown {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    justify-self: center;
-    margin: auto;
-    background-color: rgb(59, 173, 177);
-    width:  70%;
-    height: fit-content;
-    padding: 30px;
-    background-color: rgb(59, 173, 177);
-    border-radius: 5px;
-    align-items: center;
-    position: relative;
-
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-label{
-    display: flex;
-    align-self: center;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 3px;
-}
-.error{
-    color: red;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.3em;
-}
-input[type=text]:focus  {
-    border: none;
-    outline: none;
-}
-
-input[type=text] {
-    margin: auto;
-    background-color: white;
-    font-size: 1em;
-    padding-left: 5px;
-    width: 200px;
-}
-
-
-input[type=email]:focus  {
-    border: none;
-    outline: none;
-    
-}
-
-input[type=email]{
-    background-color: white;
-    font-size: 1em;
-    padding-left: 5px;
-    width: 200px;
-}
-
-
-input[type=number]{
-    background-color: white;
-    font-size: 1em;
-    padding-left: 5px;
-    width: 200px;
-}
-
-input{
-    outline: none;
-    border: none;
-    height: 30px;
-    border-radius: 5px;
- }
- .input-group{
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
- }
-
-
-.flask-pagedown{
-    display: flex;
-    flex-direction:column ;
-    align-items: center;
-}
- textarea{
-    height: 250px;
+    gap: 16px;
     width: 100%;
-    resize: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(52, 172, 180, 0.08);
+}
+
+.flask-pagedown-input {
+    width: 100%;
+    min-height: 200px;
+    padding: 16px;
+    border: 1.5px solid #b2dfdb;
+    border-radius: 8px;
+    background: #fafdff;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #2d2d2d;
+    resize: vertical;
+    transition: all 0.2s ease;
+}
+
+.flask-pagedown-input:focus {
+    border-color: #34acb4;
+    background: #f0fcff;
+    box-shadow: 0 0 0 3px #b2ebf2;
     outline: none;
-    border: none;
-    color: black;
-    font-family: monospace;
-    padding: 0 10px;
-    font-size: 1.1em;
-}
-.flask-pagedown-preview{
-    word-break: break-all;
-}
-textarea:focus{
-    outline: none;
-    border: none;
 }
 
-
-form button{
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    background-color: rgb(30, 107, 207);
-    height: 40px;
-    width: 15%;
-    border-radius: 10px;
-    font-size: 1.2em;
-    color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    box-shadow: -2px 0 3px 0 black;
-    
+.flask-pagedown-preview {
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e0f7fa;
+    word-break: break-word;
+    line-height: 1.7;
+    font-size: 1.05em;
 }
 
-button:active{
-    transform: rotateZ('10deg');
+.flask-pagedown-preview h1,
+.flask-pagedown-preview h2,
+.flask-pagedown-preview h3 {
+    color: #34acb4;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
 }
-.form-header{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: lighter;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:rgb(64, 183, 212) ;
+
+.flask-pagedown-preview p {
+    margin-bottom: 1.2em;
+    color: #2d2d2d;
 }
+
+.flask-pagedown-preview code {
+    background: #e0f7fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95em;
+    color: #007c91;
+}
+
+.flask-pagedown-preview pre {
+    background: #263238;
+    color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+.flask-pagedown-preview blockquote {
+    border-left: 4px solid #34acb4;
+    margin: 1.5em 0;
+    padding: 8px 0 8px 20px;
+    color: #455a64;
+    font-style: italic;
+}
+
+/* Modern button styles are inherited from base.css */

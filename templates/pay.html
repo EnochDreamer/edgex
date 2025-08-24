@@ -10,16 +10,12 @@ payment
 {% block content %}
 <center class="topic-header" style="font-size: 1.5em;">
     payments
-</center>
-
-<div class="pay-content" style="display: flex; flex-direction: column; align-items: center;">
-    <div class="home-container" onclick="courseContent({{course.id}})"
-        style="height:40vh;margin: auto;margin-bottom: 10px; width: 60%;background-image: url('/static/img/course_image/{{course.image}}');">
+</center>    <div class="pay-content">
+    <div class="course-preview" onclick="courseContent({{course.id}})" 
+         style="background-image: url('/static/img/course_image/{{course.image}}');">
 
     </div>
-    <div class="course-details"
-        style="display: flex;flex-direction: column;
- text-transform: capitalize; color:white;margin: auto; background-color: rgb(52, 131, 145);font-family: Arial, Helvetica, sans-serif; border-radius: 10px; padding:10px; margin-bottom: 10px; width: 40%; ">
+    <div class="course-details">
         <span>course name : {{course.name}}</span>
         <span>price : NGN {{course.price}}</span>
         <span>duration : {{course.duration}}</span>
@@ -38,8 +34,7 @@ payment
         <p>follow the link bellow to confirm your payment</p>
         <a href="whatsapp.com/api/+2348125203374">confirm</a>
     </div> -->
-    <form id="paymentForm"
-        style=" border-radius: 10px; min-width: 40vw; max-width: fit-content; margin-bottom: 10px; background-color: rgb(52, 131, 145)">
+    <form id="paymentForm" class="payment-form">
         <div class="input-group">
             <label for="email">Email Address</label>
             <input type="email" id="email-address" value="{{user.email}}" required readonly />
@@ -57,15 +52,15 @@ payment
             <input type="text" id="last-name" />
         </div>
         <div class="form-submit">
-            <button id="course" data-course-id="{{course.id}}"
-                style="padding: 10px;margin: auto;  width: 150px; background-color: rgb(245, 121, 5);color:white; border-radius: 6px; font-size: 1em;margin-bottom: 10px;"
-                type="submit" onclick="payWithPaystack(event)"> Pay </button>
+            <button id="course" class="pay-button" data-course-id="{{course.id}}" type="submit" onclick="payWithPaystack(event)">
+                Pay Now
+            </button>
         </div>
     </form>
 
-    <div
-        style="display: flex; justify-content: center;background-color: rgb(52, 131, 145);font-family: Arial, Helvetica, sans-serif; border-radius: 10px; padding:10px;width: 40%;color: white;">
-        <span>Description : {{course.description}}</span>
+    <div class="course-description">
+        <h3>Course Description</h3>
+        <p>{{course.description}}</p>
     </div>
 
 </div>
